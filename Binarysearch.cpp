@@ -2,7 +2,7 @@
 using namespace std;
 
 int element[10];
-int Panjang;
+int nPanjang;
 int x;
 
 void input()
@@ -10,9 +10,9 @@ void input()
     while (true)
     {
         cout << "Masukkan panjang (array maksimal 10): ";
-        cin >> Panjang;
+        cin >> nPanjang;
 
-        if (Panjang <= 10)
+        if (nPanjang <= 10)
         {
             break;
         }
@@ -82,37 +82,37 @@ void binarySearch()
 
         int low = 0;
         int high = nPanjang - 1;
+        bool ditemukan = false;
 
-        do
+        while (low <= high)
         {
             int mid = (low + high) / 2;
 
             if (element[mid] == x)
             {
-                cout << "\n[✓] Elemen" << x << " ditemukan pada index " << mid << "\n";
-                return;
+                cout << "\n[✓] Elemen " << x << " ditemukan pada index " << mid << "\n";
+                ditemukan = true;
+                break;
             }
-            if (x < element[mid])
+            else if (x < element[mid])
             {
                 high = mid - 1;
             }
-            if (x > element[mid])
+            else
             {
                 low = mid + 1;
             }
-        } while (low <= high);
+        }
 
-        if (low > high)
+        if (!ditemukan)
         {
             cout << "\n[✗] Elemen " << x << " tidak ditemukan dalam array.\n";
         }
-        {
+
         cout << "\nIngin mencari ulang? (y/n): ";
         cin >> ulang;
 
-        }while (ulang == 'y' || ulang == 'Y');
-
-    }
+    } while (ulang == 'y' || ulang == 'Y');
 }
 
 int main()
@@ -122,5 +122,3 @@ int main()
     display();
     binarySearch();
 }
-
-
